@@ -14,7 +14,10 @@ const AutocorrectTextarea = ({ corrections }) => {
     // Loop through each key in the replacements object
     for (const [key, value] of Object.entries(corrections)) {
       // Create a regular expression with word boundaries to avoid partial matches
-      // const regex = new RegExp(`\\b${key}\\b`, "g");
+      // (?<=^|\\s) this is positive lookbehind = (?<=) when symbol ^ is new line of word and \s is space,
+      // \\s using double backslash because would convert to only one backslash if using new RegExp, you can using direct string usin one backslash /(?<=^|\s)weird\/s/\g.
+      // so this would check the word has space before or the word is first word.
+      //  /\sweird\s/ <= using one backslash if not using new regExp
       const regex = new RegExp(`(?<=^|\\s)${key}(?=\\s)`, "g");
       console.log(regex);
       const ex = "hi wierd ";
